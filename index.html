@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+<head>
+  <style type="text/css">
+
+  body { 
+    margin:0; 
+    padding: 0;
+  }
+
+  html, #map{
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+    }
+
+
+  </style>
+
+  <title>Water Line</title>
+
+  <!-- Link to Leaflet JS libraryeaflet -->
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+  <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+
+   <!-- Jquery so that we can pull in external JSON files  -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+
+</head>
+
+<body>
+  <div id="map"></div>
+
+
+  <script>
+
+  //MAP BASE LAYER
+  //load the tiles
+  var layer = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
+  });
+
+  //create a map object
+  var map = L.map('map', {
+    scrollWheelZoom: false, //make it so you can't zoom by scrolling
+    center: [40.691572,   -73.986440],
+    zoom: 14
+  });
+
+  map.addLayer(layer);
+  
+
+
+ // Styling for Flood Data JSON
+  floodZoneStyle = {
+    "color": "#003366",
+    "weight": 0,
+    "opacity": 0.75
+  
+  }
+
+  var floodData = $.getJSON("data/sandy.json", function(data){
+    L.geoJson(data, {
+      style: floodZoneStyle
+    }).addTo(map); 
+  });
+
+   // Styling for walking line
+  walkStyle = {
+    "color": "#003366",
+    "weight": 3,
+    "opacity": 0.9
+  }
+
+  var walkData = $.getJSON("data/walk.geojson", function(data){
+    L.geoJson(data, {
+      style: walkStyle //pass in the styling as an object
+    }).addTo(map); 
+  });
+
+
+  </script>
+
+</body>
+</html>
