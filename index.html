@@ -3,62 +3,10 @@
 
 <html lang="en">
 <head>
-  <style type="text/css">
-
-  body, html, #map { 
-      width:100%; 
-      height:100%; 
-      padding: 0; 
-      margin: 0;
-      position: absolute;
-      font-family: 'Dosis', sans-serif;
-      font-weight: 200;
-      
-  }
-
-  html, #map{
-
-      top: 0;
-      bottom: 0;
-      width: 100%;
-    }
-
-  #intro {
-      position: absolute;
-      top: 20px;
-      left:30px;
-      width:250px;
-      background:#00264d;
-      opacity:.85;
-      overflow:auto;
-      padding:15px 25px 15px 25px;
-      font-size:13px;
-      letter-spacing: 1px;
-      line-height: 150%;
-      color:#ffffff;
-      border-radius:3px;
-      z-index:50;
-    }
-
-    .title {
-      font-weight: 300;
-      letter-spacing: 5px;
-      font-size:36px;
-      padding-bottom:5px;
-    }
-
-    a {
-     color:#ffffff;
-     font-weight:400;
-    }
-
-    a:hover { 
-      color:#808080;
-    }
-
-  </style>
 
   <title>Water Line</title>
+
+
 
   <!-- Link to Leaflet JS library -->
   <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
@@ -69,6 +17,7 @@
   <link href='https://api.mapbox.com/mapbox.js/v2.3.0/mapbox.css' rel='stylesheet' />
 
   <link href='https://fonts.googleapis.com/css?family=Dosis:400,200,300,500,600' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="waterline.css">
 
    <!-- Jquery so that we can pull in external JSON files  -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
@@ -79,6 +28,16 @@
   <div id="intro">
       <h1><div class="title">WATER LINE</div></h1>
       <p>Water Line is a map of a walk, along the border of Hurricane Sandy's flood zones.<br></br>Using a map of the inundated areas, I traced the edge of it along a route from Brooklyn Heights to Red Hook. The goal is to eventually cover the entirety of the flood zone's edge and map it through walking. Original data sourced from <a href="https://data.cityofnewyork.us/Environment/Sandy-Inundation-Zone/uyj8-7rv5">NYC Open Data.</a></p>
+      <hr>
+      <div id="legend">LEGEND
+        <br/>
+        <br/>
+        <span style='background:#bfc9da;'></span>
+        <span style='background:#003366;'></span>
+        <label>ORIGINAL DATA</label>
+        <label>MY WALK</label>
+      </div>
+
   </div>
 
   <div id="map"></div>
@@ -92,7 +51,7 @@
   //CREATE BASEMAP with custom tiles
   // L.mapbox.map('map', 'mapbox.streets-satellite') //change map styles here.    
   var map = L.mapbox.map('map', 'rebeccalieberman.eabe16d3',{ zoomControl: false })
-    .setView([40.689450, -74.002168], 14); // lat, long, zoom level
+    .setView([40.690010, -74.002790], 14); // lat, long, zoom level
 
   //custom positioning of zoom control
   new L.Control.Zoom({ position: 'topright' }).addTo(map);
